@@ -1,0 +1,27 @@
+{
+  "name": "2020adventofcode",
+  "description": "My 2020 Advent of Code",
+  "version": "1.0.0",
+  "dependencies": {
+    "colors": "^1.4.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "nodemonConfig": {
+    "ext": "js,txt",
+    "exec": "npm start",
+    "events": {
+      "start": "clear"
+    }
+  },
+  "private": true,
+  "scripts": {
+    "start": "node index",
+    "test": "node test",
+    "watch": "nodemon"
+  }
+}
