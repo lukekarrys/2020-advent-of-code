@@ -21,11 +21,12 @@ const problem2 = (lines) => {
 
   while (contiguousWindow <= numbers.length) {
     for (let i = 0; i < numbers.length; i += 1) {
-      const contiguousNumbers = numbers.slice(i, i + contiguousWindow).sort()
+      const contiguousNumbers = numbers.slice(i, i + contiguousWindow)
       if (sum(contiguousNumbers) === answer1) {
-        return contiguousNumbers[0] + lastItem(contiguousNumbers)
+        return Math.min(...contiguousNumbers) + Math.max(...contiguousNumbers)
       }
     }
+
     contiguousWindow += 1
   }
 }
