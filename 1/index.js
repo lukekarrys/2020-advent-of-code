@@ -1,23 +1,10 @@
-const mult = (arr) => arr.reduce((a, b) => a * b, 1)
+const { twoSum, mult } = require("../util")
 
-const twoSum = (lines) => {
+const NUM = 2020
+
+const problem1 = (lines) => {
   const numbers = lines.map((n) => +n)
-
-  let res = null
-
-  numbers.forEach((num1, index1) => {
-    numbers.forEach((num2, index2) => {
-      if (index1 !== index2) {
-        if (num1 + num2 === 2020) {
-          res = [num1, num2]
-          return
-        }
-      }
-    })
-    if (res) return
-  })
-
-  return mult(res)
+  return mult(twoSum(numbers, NUM))
 }
 
 const threeSum = (lines) => {
@@ -28,7 +15,7 @@ const threeSum = (lines) => {
     numbers.forEach((num2, index2) => {
       numbers.forEach((num3, index3) => {
         if (index1 !== index2 && index1 !== index3) {
-          if (num1 + num2 + num3 === 2020) {
+          if (num1 + num2 + num3 === NUM) {
             res = [num1, num2, num3]
             return
           }
@@ -42,4 +29,4 @@ const threeSum = (lines) => {
   return mult(res)
 }
 
-module.exports = [twoSum, threeSum]
+module.exports = [problem1, threeSum]

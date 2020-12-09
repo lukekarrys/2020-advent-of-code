@@ -1,10 +1,12 @@
+const { lastIndex } = require("../util")
+
 const LOWER = "L"
 const UPPER = "U"
 
 const binarySpacePartition = (arr) => {
   return arr.reduce(
     ([min, max], item, index) => {
-      if (index === arr.length - 1) {
+      if (index === lastIndex(arr)) {
         return item === LOWER ? min : max
       }
       const half = (min + max) / 2

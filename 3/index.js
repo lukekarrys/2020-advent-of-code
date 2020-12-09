@@ -1,4 +1,5 @@
 const colors = require("colors/safe")
+const { lastIndex, mult } = require("../util")
 
 const HIT = "X"
 const MISS = "O"
@@ -6,7 +7,7 @@ const DEBUG = false
 const debug = (...parts) => DEBUG && console.log(...parts)
 
 const wrap = (arr, nextIndex) => {
-  const needsWrap = nextIndex > arr.length - 1
+  const needsWrap = nextIndex > lastIndex(arr)
   return nextIndex - (needsWrap ? arr.length : 0)
 }
 
@@ -50,15 +51,15 @@ const problem2 = (lines) => {
     return n.split("").map((c) => (c === "#" ? HIT : MISS))
   })
 
-  return [
-    [1, 1],
-    [3, 1],
-    [5, 1],
-    [7, 1],
-    [1, 2],
-  ]
-    .map((slope) => walkSlope(mountain, ...slope))
-    .reduce((a, b) => a * b, 1)
+  return mult(
+    [
+      [1, 1],
+      [3, 1],
+      [5, 1],
+      [7, 1],
+      [1, 2],
+    ].map((slope) => walkSlope(mountain, ...slope))
+  )
 }
 
 module.exports = [problem1, problem2]

@@ -1,9 +1,8 @@
+const { lastIndex, lastItem } = require("../util")
+
 const ACC = "acc"
 const JMP = "jmp"
 const NOP = "nop"
-
-const lastIndex = (arr) => arr.length - 1
-const lastItem = (arr) => arr[lastIndex(arr)]
 
 const parseInstructions = (lines) => {
   return lines.map((line) => {

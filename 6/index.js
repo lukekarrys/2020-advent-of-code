@@ -1,3 +1,5 @@
+const { lastItem } = require("../util")
+
 const uniqYesesPerGroup = (group) => {
   return group.reduce((acc, person) => new Set([...acc, ...person]), new Set())
 }
@@ -23,7 +25,7 @@ const parseGroups = (lines) => {
         acc.push([])
         return acc
       }
-      acc[acc.length - 1].push(line.split(""))
+      lastItem(acc).push(line.split(""))
       return acc
     },
     [[]]

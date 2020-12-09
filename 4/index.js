@@ -1,4 +1,4 @@
-const last = (arr) => arr[arr.length - 1]
+const { lastItem } = require("../util")
 
 const range = (val, min, max) => {
   const num = +val
@@ -37,7 +37,7 @@ const parsePassports = (lines) => {
       const fields = line.split(" ").map((field) => field.split(":"))
 
       fields.forEach(([key, value]) => {
-        last(acc)[key] = value
+        lastItem(acc)[key] = value
       })
 
       return acc
