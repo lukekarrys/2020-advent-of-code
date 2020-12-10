@@ -1,4 +1,4 @@
-const { twoSum, sum, lastItem } = require("../util")
+const { twoSum, sum } = require("../util")
 
 const parseLines = (lines) => {
   return lines.map((line) => +line)
@@ -26,7 +26,6 @@ const problem2 = (lines) => {
         return Math.min(...contiguousNumbers) + Math.max(...contiguousNumbers)
       }
     }
-
     contiguousWindow += 1
   }
 }

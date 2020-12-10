@@ -1,11 +1,7 @@
 const fs = require("fs").promises
 const path = require("path")
 const assert = require("assert")
-
-const readLines = async (day) => {
-  const input = await fs.readFile(path.resolve(day, "input.txt"))
-  return input.toString().split("\n")
-}
+const { readLines, readDays } = require("./util")
 
 const suppressConsole = () => {
   const ogConsole = global.console
@@ -54,10 +50,9 @@ const errorMessage = (e) => {
 }
 
 const main = async () => {
-  const days = await fs.readdir("./")
-  const daysTests = (
-    await Promise.all(days.filter((d) => !isNaN(+d)).map(testDay))
-  ).flat()
+  const days = await readDays()
+  console.log(days)
+  const daysTests = (await Promise.all(days.map(testDay))).flat()
 
   return {
     ok: daysTests.every((t) => t.ok),

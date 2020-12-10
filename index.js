@@ -1,14 +1,10 @@
 const fs = require("fs").promises
 const path = require("path")
 const testDay = require("./test")
+const { readLines, readDays } = require("./util")
 
 const NS_PER_SEC = 1e9
 let DAYS = process.argv.slice(2)
-
-const readLines = async (dir) => {
-  const input = await fs.readFile(path.resolve(dir, "input.txt"))
-  return input.toString().split("\n")
-}
 
 const title = (str) => {
   const remaining = 45 - str.length
@@ -18,7 +14,7 @@ const title = (str) => {
 }
 
 const main = async () => {
-  const allDays = (await fs.readdir("./")).filter((d) => !isNaN(+d))
+  const allDays = await readDays()
 
   if (DAYS[0] === "all" || !DAYS.length) {
     DAYS = allDays

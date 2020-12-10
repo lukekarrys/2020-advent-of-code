@@ -1,3 +1,6 @@
+const fs = require("fs").promises
+const path = require("path")
+
 module.exports.sum = (arr) => arr.reduce((a, b) => a + b, 0)
 
 module.exports.mult = (arr) => arr.reduce((a, b) => a * b, 1)
@@ -22,4 +25,20 @@ module.exports.twoSum = (numbers, sum) => {
   })
 
   return res
+}
+
+module.exports.range = (start, end) =>
+  [...new Array(end - start + 1)].map((el, ind) => ind + start)
+
+module.exports.flow = (fns) => (input) =>
+  fns.reduce((acc, fn) => fn(acc), input)
+
+module.exports.readLines = async (dir) => {
+  const input = await fs.readFile(path.resolve(dir, "input.txt"))
+  return input.toString().split("\n")
+}
+
+module.exports.readDays = async () => {
+  const dir = await fs.readdir("./")
+  return dir.filter((d) => /^\d+$/.test(d)).sort((a, b) => a - b)
 }
