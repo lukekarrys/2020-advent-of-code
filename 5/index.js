@@ -45,7 +45,6 @@ const problem2 = (lines) => {
 
   return (
     passes
-
       .sort((a, b) => a - b)
       .find((id, index, list) => {
         if (id - list[index - 1] !== 1 && index !== 0) {

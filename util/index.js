@@ -3,6 +3,8 @@ const path = require("path")
 
 module.exports.sum = (arr) => arr.reduce((a, b) => a + b, 0)
 
+module.exports.diff = (arr) => arr.slice(1).reduce((a, b) => a - b, arr[0])
+
 module.exports.mult = (arr) => arr.reduce((a, b) => a * b, 1)
 
 const lastIndex = (arr) => arr.length - 1
