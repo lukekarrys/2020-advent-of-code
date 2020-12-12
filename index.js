@@ -1,9 +1,5 @@
-const fs = require("fs").promises
-const path = require("path")
-const testDay = require("./test")
-const { readLines, readDays } = require("./util")
+const { readLines, readDays, hrtime, readOutput } = require("./util")
 
-const NS_PER_SEC = 1e9
 let DAYS = process.argv.slice(2)
 
 const title = (str) => {
@@ -28,23 +24,22 @@ const main = async () => {
     console.log(title(`Day ${day}`))
     const lines = await readLines(day)
     const problems = require(`./${day}/index.js`)
-    const tests = await testDay(day)
+    const output = await readOutput(day)
 
     for (const [index, problem] of problems.entries()) {
-      const test = tests[index]
-
-      const time = process.hrtime()
+      const endTime = hrtime()
       const res = await problem(lines)
-      const diff = process.hrtime(time)
+      const timeRes = endTime()
 
-      const diffNano = diff[0] * NS_PER_SEC + diff[1]
-      total += diffNano
+      const test = output[index]
+
+      total += timeRes.nano
 
       console.log(
         `Problem ${index + 1}:`,
         res,
-        test ? (test.ok ? "✅" : "❌") : "",
-        `${(diffNano / 1000 / 1000).toFixed(3)}ms`
+        test ? (test === res ? "✅" : "❌") : "",
+        `${timeRes.ms.toFixed(3)}ms`
       )
     }
     console.log("")

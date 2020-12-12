@@ -1,7 +1,5 @@
-const fs = require("fs").promises
-const path = require("path")
 const assert = require("assert")
-const { readLines, readDays } = require("./util")
+const { readLines, readDays, readOutput } = require("./util")
 
 const suppressConsole = () => {
   const ogConsole = global.console
@@ -12,11 +10,7 @@ const suppressConsole = () => {
 const testDay = async (day) => {
   const lines = await readLines(day)
   const problems = require(`./${day}/index.js`)
-  const output = (await fs.readFile(`./${day}/output.txt`))
-    .toString()
-    .split("\n")
-    .filter(Boolean)
-    .map((n) => +n)
+  const output = await readOutput(day)
 
   const tests = []
 
@@ -60,18 +54,14 @@ const main = async () => {
   }
 }
 
-if (require.main !== module) {
-  module.exports = testDay
-} else {
-  main()
-    .then((res) => {
-      console.log(res.messages.join("\n"))
-      if (!res.ok) {
-        process.exit(1)
-      }
-    })
-    .catch((e) => {
-      console.error(e)
+main()
+  .then((res) => {
+    console.log(res.messages.join("\n"))
+    if (!res.ok) {
       process.exit(1)
-    })
-}
+    }
+  })
+  .catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })

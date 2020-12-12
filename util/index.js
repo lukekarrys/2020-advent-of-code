@@ -29,6 +29,40 @@ module.exports.twoSum = (numbers, sum) => {
   return res
 }
 
+module.exports.countChars = (str) =>
+  str.split("").reduce((acc, l) => {
+    acc[l] = (acc[l] ?? 0) + 1
+    return acc
+  }, {})
+
+module.exports.shallowEqual = (a, b) => {
+  for (const key in a) {
+    if (!(key in b) || a[key] !== b[key]) {
+      return false
+    }
+  }
+
+  for (const key in b) {
+    if (!(key in a) || a[key] !== b[key]) {
+      return false
+    }
+  }
+
+  return true
+}
+
+const NS_PER_SEC = 1e9
+module.exports.hrtime = () => {
+  const time = process.hrtime()
+
+  return () => {
+    const diff = process.hrtime(time)
+    const nano = diff[0] * NS_PER_SEC + diff[1]
+    const ms = nano / 1000 / 1000
+    return { nano, ms }
+  }
+}
+
 module.exports.range = (start, end) =>
   [...new Array(end - start + 1)].map((el, ind) => ind + start)
 
@@ -44,3 +78,10 @@ module.exports.readDays = async () => {
   const dir = await fs.readdir("./")
   return dir.filter((d) => /^\d+$/.test(d)).sort((a, b) => a - b)
 }
+
+module.exports.readOutput = async (dir) =>
+  (await fs.readFile(path.resolve(dir, "output.txt")))
+    .toString()
+    .split("\n")
+    .filter(Boolean)
+    .map((n) => +n)

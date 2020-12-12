@@ -1,8 +1,4 @@
-const countChars = (str) =>
-  str.split("").reduce((acc, l) => {
-    acc[l] = (acc[l] ?? 0) + 1
-    return acc
-  }, {})
+const { countChars } = require("../util")
 
 const parsePasswords = (lines) =>
   lines.map((n) => {
