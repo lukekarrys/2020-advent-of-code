@@ -45,7 +45,6 @@ const errorMessage = (e) => {
 
 const main = async () => {
   const days = await readDays()
-  console.log(days)
   const daysTests = (await Promise.all(days.map(testDay))).flat()
 
   return {

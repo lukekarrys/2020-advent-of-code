@@ -1,15 +1,10 @@
 const colors = require("colors/safe")
-const { lastIndex, mult } = require("../util")
+const { mult, wrap } = require("../util")
 
 const HIT = "X"
 const MISS = "O"
 const DEBUG = false
 const debug = (...parts) => DEBUG && console.log(...parts)
-
-const wrap = (arr, nextIndex) => {
-  const needsWrap = nextIndex > lastIndex(arr)
-  return nextIndex - (needsWrap ? arr.length : 0)
-}
 
 const walkSlope = (lines, x, y) => {
   let xPosition = 0
@@ -27,7 +22,7 @@ const walkSlope = (lines, x, y) => {
 
     debug(vizLine, result)
 
-    xPosition = wrap(line, xPosition + x)
+    xPosition = wrap(line, xPosition, x)
 
     return result
   }).length

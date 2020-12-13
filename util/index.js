@@ -11,6 +11,19 @@ const lastIndex = (arr) => arr.length - 1
 module.exports.lastIndex = lastIndex
 module.exports.lastItem = (arr) => arr[lastIndex(arr)]
 
+module.exports.wrap = (arr, index, delta) => {
+  const minDelta = delta % arr.length
+  const nextIndex = index + minDelta
+
+  if (nextIndex < 0) {
+    return arr.length + nextIndex
+  } else if (nextIndex > lastIndex(arr)) {
+    return nextIndex - arr.length
+  }
+
+  return nextIndex
+}
+
 module.exports.twoSum = (numbers, sum) => {
   let res = null
 
