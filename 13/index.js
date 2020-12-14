@@ -35,20 +35,20 @@ const problem1 = (lines) => {
 // https://starboard.gg/robsh/advent-of-code-2020-n5gzhjY
 // Another day getting stuck in a way that felt exactly like Day 10
 // I came up with my own solution that was trying to do pretty much the same thing
-// but I couldn't get the right number start, step to pass to subsequent passes
-const findBus = (trains, start = 1, step = 1) => {
-  if (trains.length === 0) return start
-
-  const [train, offset] = trains.shift()
-  const multiple = step * train
-
-  for (let time = start; time <= multiple; time += step) {
-    if ((time + offset) % train === 0) {
-      return findBus(trains, time, multiple)
-    }
+// but I couldn't get the right number time, step to pass to subsequent passes
+const findBus = (trains, time = 1, step = 1) => {
+  if (trains.length === 0) {
+    return time
   }
 
-  throw new Error("This should never reach")
+  const [train, offset] = trains.shift()
+
+  while (true) {
+    if ((time + offset) % train === 0) {
+      return findBus(trains, time, step * train)
+    }
+    time += step
+  }
 }
 
 const problem2 = (lines) => {
