@@ -1,12 +1,3 @@
-const {
-  lcm,
-  lastItem,
-  range,
-  primeFactors,
-  nextPrime,
-  mult,
-} = require("../util")
-
 const parseLines = (lines) => {
   const [ts, trains] = lines
   return {
